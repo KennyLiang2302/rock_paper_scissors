@@ -1,4 +1,7 @@
-const choices = ["Rock", "Paper", "Scissors"]
+const choices = ["Rock", "Paper", "Scissors"];
+const PLAYER = 0;
+const COMPUTER = 1;
+const TIE = 2;
 
 function computerPlay() {
   let number = Math.floor(Math.random() * 3)
@@ -23,43 +26,69 @@ function playRound(playerSelection, computerSelection) {
   if (playerSelection == "rock") {
     switch (computerSelection) {
       case "paper":
-        return "You Lose! Paper beats Rock"
+        console.log("You Lose! Paper beats Rock");
+        return COMPUTER;
       case "scissors":
-        return "You Win! Rock beats Scissors"
+        console.log("You Win! Rock beats Scissors");
+        return PLAYER;
       case "rock":
-        return "You Tied"
+        console.log("You Tied! Rock ties with Rock");
+        return TIE;
     }
   }
   else if (playerSelection == "paper") {
     switch (computerSelection) {
       case "scissors":
-        return "You Lose! Scissors beats Rock"
+        console.log("You Lose! Scissors beats Rock");
+        return COMPUTER;
       case "rock":
-        return "You Win! Rock beats Scissors"
+        console.log("You Win! Rock beats Scissors");
+        return PLAYER;
       case "paper":
-        return "You Tied"
+        console.log("You Tied! Paper ties with Paper");
+        return TIE;
     }
   }
   else {
     switch (computerSelection) {
       case "rock":
-        return "You Lose! Rock beats Scissors"
+        console.log("You Lose! Rock beats Scissors");
+        return COMPUTER;
       case "paper":
-        return "You Win! Scissors beats paper"
+        console.log("You Win! Scissors beats paper");
+        return PLAYER;
       case "scissors":
-        return "You Tied"
+        console.log("You Tied! Scissors ties with Scissors")
+        return TIE;
     }
   }
 }
 
 function game() {
+  let playerScore = 0;
+  let computerScore = 0;
   for (let i = 0; i < 5; i++) {
     let computerChoice = computerPlay();
     let playerChoice = playerSelection();
     computerChoice = computerChoice.toLowerCase();
     playerChoice = playerChoice.toLowerCase();
     let result = playRound(playerChoice, computerChoice);
-    console.log(result);
+    if (result == PLAYER) {
+      playerScore += 1;
+    }
+    else if (result == COMPUTER) {
+      computerScore += 1;
+    }
+    console.log("Player:" + playerScore + " Computer:" + computerScore);
+  }
+  if (playerScore > computerScore) {
+    console.log("You Win!")
+  }
+  else if (playerScore < computerScore) {
+    console.log("You Lose!")
+  }
+  else {
+    console.log("You Tied!")
   }
 }
 
